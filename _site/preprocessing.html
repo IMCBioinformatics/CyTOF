@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">WCMC CyTOF pipeline</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    pipeline
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Installation.html">Installation</a>
+    </li>
+    <li>
+      <a href="preprocessing.html">Preporcessing</a>
+    </li>
+    <li>
+      <a href="visualization.html">Visulaization</a>
+    </li>
+    <li>
+      <a href="clustering.html">Cell Clustering</a>
+    </li>
+    <li>
+      <a href="discovery.html">Discovery</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://example.com">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p><br class="long"/></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Preprocessing involves:</p>
+<ul>
+<li>Normalization</li>
+<li>Debarcoding</li>
+<li>Randomize 0 values between -1 and 0</li>
+<li>Transformations</li>
+</ul>
+<p><br></p>
+</div>
+<div id="normalization-and-debarcoding" class="section level2">
+<h2>Normalization and Debarcoding</h2>
+<p>For normalization, this pipeline uses the <a href="https://www.bioconductor.org/packages/devel/bioc/html/CATALYST.html">R CATALYST package</a> which implements bead-based normalization as described by Finck et al. 2013 <sup>1</sup>.</p>
+<p>Here, identification of bead-singlets (used for normalization), as well as of bead-bead and cell-bead doublets (to be removed) is automated as follows:</p>
+<ol style="list-style-type: decimal">
+<li>beads are identified as events with their top signals in the bead channels</li>
+<li>cell-bead doublets are remove by applying a separation cutoff to the distance between the lowest bead and highest non-bead signal</li>
+<li>events passing all vertical gates defined by the lower bounds of bead signals are removed (these include bead-bead and bead-cell doublets)</li>
+<li>bead-bead doublets are removed by applying a default median±5 rule to events identified in step 2. The remaining bead events are used for normalization.</li>
+</ol>
+<p><br></p>
+<p>For debarcoding, an implementation of the single-cell deconvolution algorithm described by Zunder et al.2015 <sup>2</sup> was used from the CATALYST package.</p>
+<p><br></p>
+</div>
+<div id="commands" class="section level2">
+<h2>Commands</h2>
+<p><br></p>
+<div id="for-normalization-only" class="section level3">
+<h3>For normalization only</h3>
+<p>For performing only normalization on files, you will have to provide an input file or files, bead masses and an output directory to store the output files and plots. Bead masses are just a list for mass channels corresponding to the beads separated by comma (,) .</p>
+<pre><code>catalyst (--inputFiles=&lt;files&gt; --beadMasses=&lt;beads&gt; --outputDir=&lt;results_dir&gt;) [--k=&lt;k&gt; --trim=&lt;trim&gt; --removeBeads=&lt;rmbeads&gt;]
+</code></pre>
+<p><br></p>
+<div id="an-example" class="section level4">
+<h4>An example</h4>
+<pre><code>catalyst  --inputFiles=test.fcs --beadMasses=140,151,153,165,175 --outputDir=results --k=300</code></pre>
+<p><br></p>
+</div>
+<div id="output-files" class="section level4">
+<h4>Output files</h4>
+<p>All files are saved in the output directory as specified by the user.</p>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="examples/beads_before_vs_after.pdf">beads_before_vs_after.pdf</a></td>
+<td>shows the intensity of smoothed normalization of beads</td>
+</tr>
+<tr class="even">
+<td><a href="examples/beads_gated.pdf">beads_gated.pdf</a></td>
+<td>Gating of beads to show singlets and doublets</td>
+</tr>
+<tr class="odd">
+<td>raw_concat_normalized.fcs</td>
+<td>Normalized file</td>
+</tr>
+<tr class="even">
+<td>raw_concat_beads.fcs</td>
+<td>Raw file with beads.(only generated if beads are removed)</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+</div>
+</div>
+<div id="for-debarcoding-only" class="section level3">
+<h3>For debarcoding only</h3>
+<p>To perform debarcoding, a barcode scheme file has to be provided <a href="examples/bc.txt">(example file)</a>.Please make sure it is a comma separate file and follows a similar format as the example.</p>
+<div id="output-files-1" class="section level4">
+<h4>Output files</h4>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="examples/yield_plot.pdf">yield_plot.pdf</a></td>
+<td>plot of yield vs barcode separation to asses channel staining.</td>
+</tr>
+<tr class="even">
+<td><a href="examples/event_plot.pdf">event_plot.pdf</a></td>
+<td>plots normalized intensities for each barcode</td>
+</tr>
+<tr class="odd">
+<td><a href="examples/mahal_plot.pdf">mahal_plot.pdf</a></td>
+<td>plots all inter-barcode interactions for the population specified</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="usage" class="section level4">
+<h4>Usage</h4>
+<pre><code>catalyst (--inputFileDebarcode=&lt;file&gt; --outputDir=&lt;results_dir&gt;  --barcodeScheme=&lt;file&gt;) [--barcode_plotMahal=&lt;barcode&gt;]</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="for-performing-both-normalization-and-debarcoding" class="section level3">
+<h3>For performing both normalization and debarcoding</h3>
+<pre><code>catalyst (--inputFiles=&lt;files&gt; --beadMasses=&lt;beads&gt; --outputDir=&lt;results_dir&gt; --barcodeScheme=&lt;file&gt;) [--k=&lt;k&gt; --trim=&lt;trim&gt; --removeBeads=&lt;rmbeads&gt; --barcode_plotMahal=&lt;barcode&gt;]</code></pre>
+<p><br></p>
+<pre><code>Options:
+  --inputFiles=&lt;files&gt;          Input FCS files comma separated list
+  --outputDir=&lt;dir&gt;             Output directory for data and plots
+  --beadMasses=&lt;beads&gt;          Bead masses to be used for normalization
+  --removeBeads=&lt;rmbeads&gt;       [default: FALSE] remove beads
+  --k=&lt;k&gt;                       [default 300] integer width of the median window used for bead smoothing
+  --trim=&lt;trim&gt;                 [defualt 5] a single non-negative number applied to bead events
+  --inputFileDebarcode=&lt;file&gt;   A single input file for Debarcoding
+  --barcodeScheme=&lt;filename&gt;    filename for the barcode scheme
+  --barcode_plotMahal=&lt;barcode&gt; Barcode for function plotMahal to plot all inter-barcode interactions for one barcode compared to others</code></pre>
+<p><br> <br></p>
+</div>
+</div>
+<div id="transformations" class="section level2">
+<h2>Transformations</h2>
+<p>There are 5 options for transformations. These are implemented by functions in R packages <a href="https://www.bioconductor.org/packages/devel/bioc/html/flowCore.html">flowCore</a> and <a href="https://www.bioconductor.org/packages/devel/bioc/html/cytofkit.html">Cytofkit</a>.</p>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Transformation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>logicl</td>
+<td>Logicle transformation creates a subset of biexponentialTransform hyperbolic sine transformation functions.</td>
+</tr>
+<tr class="even">
+<td>autoLgcl</td>
+<td>Similar to autoLgcl but uses a different method to detect outliers</td>
+</tr>
+<tr class="odd">
+<td>arcsinh</td>
+<td>hyperbolic arcsine (arcsinh) transformation</td>
+</tr>
+<tr class="even">
+<td>cytofAsinh</td>
+<td>Inverse hyperbolic sine transformation (arsinh) with a cofactor of 5, reduce noise from negative values</td>
+</tr>
+<tr class="odd">
+<td>none</td>
+<td>No transformation is performed</td>
+</tr>
+</tbody>
+</table>
+<p>Each of these transformation takes in different input parameters for which default values are provided but in some cases, flexibility is needed to play around with these parameters to get a more appropriate transformation.</p>
+</div>
+<div id="commands-1" class="section level2">
+<h2>Commands</h2>
+<pre><code>transform (--inputFiles=&lt;files&gt; --transformation=&lt;name&gt; --outputDir=&lt;dir&gt;) [--inputMarkers=&lt;names&gt; --prefix=&lt;prefix&gt; --w=&lt;w&gt; --t=&lt;t&gt; --m=&lt;m&gt; --a=&lt;a&gt; --a_a=&lt;a_a&gt; --a_b=&lt;a_b&gt; --a_c=&lt;a_c&gt; --q=&lt;q&gt;]</code></pre>
+<p>Description: Tranfrom data</p>
+<pre><code>Options:
+--inputFiles=&lt;files&gt;           Input FCS files
+--inputMarkers=&lt;makerfiles&gt;   Input files wiht markers to do analysis on 
+--outputDir=&lt;dir&gt;             Output directory for data and plots
+--prefix=&lt;prefix&gt;             prefix for output file naming
+--transformation=&lt;transform&gt;  [default logicl] options:autoLgcl,none,arcsinh,cytofAsinh
+--w=&lt;w&gt;                       [default 0.25] parameter for Logicle Transform
+--t=&lt;t&gt;                       [default 262144] parameter for Logicle Transform
+--m=&lt;m&gt;                       [default 4.5] parameter for Logicle Transform
+--a=&lt;a&gt;                       [default 0] parameter for Logicle Transform
+--a_a=&lt;a_a&gt;                   [default 1 ] parameter for arcsinh Transform
+--a_b=&lt;a_b&gt;                   [default 1 ] parameter for arcsinh Transform
+--a_c=&lt;a_c&gt;                   [default 0 ] parameter for arcsinh Transform
+--q=&lt;q&gt;                       [default 0.05] parameter for autoLgcl Transform</code></pre>
+<p><br></p>
+<div id="references" class="section level3">
+<h3>References</h3>
+<ol style="list-style-type: decimal">
+<li>R. Finck et al., Normalization of mass cytometry data with bead standards. Cytometry Part A. 83A, 483–494 (2013).</li>
+<li>E. R. Zunder et al., Palladium-based mass tag cell barcoding with a doublet-filtering scheme and single-cell deconvolution algorithm. Nat. Protocols. 10, 316–333 (2015).</li>
+</ol>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

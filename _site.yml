@@ -1,0 +1,35 @@
+name: "WCMC CyTOF pipeline"
+navbar:
+  title: "WCMC CyTOF pipeline"
+  type: inverse
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "pipeline"
+      icon: fa-gear
+      menu:
+        - text: "Introduction"
+          href: introduction.html
+        - text: "Installation"
+          href: Installation.html
+        - text: "Preporcessing"
+          href:  preprocessing.html
+        - text: "Visulaization"
+          href: visualization.html
+        - text: "Cell Clustering"
+          href: clustering.html
+        - text: "Discovery"
+          href: discovery.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://example.com
+    - icon: fa-info
+      href: about.html
+      
+output:
+  html_document:
+    theme: flatly
+    highlight: textmate
+    include:
+    css: style.css

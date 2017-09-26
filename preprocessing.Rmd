@@ -1,0 +1,165 @@
+
+<br class="long"/>
+
+## Introduction
+
+Preprocessing involves:
+
+* Normalization
+* Debarcoding
+* Randomize 0 values between -1 and 0
+* Transformations
+
+<br>
+
+## Normalization and Debarcoding
+
+For normalization, this pipeline uses the <a href="https://www.bioconductor.org/packages/devel/bioc/html/CATALYST.html">R CATALYST package</a> which implements bead-based normalization as described by Finck et al. 2013 ^1^. 
+
+
+Here, identification of bead-singlets (used for normalization), as well as of bead-bead and cell-bead doublets (to be removed) is automated as follows:
+
+1. beads are identified as events with their top signals in the bead channels
+2. cell-bead doublets are remove by applying a separation cutoff to the distance between the lowest bead and highest non-bead signal
+3. events passing all vertical gates defined by the lower bounds of bead signals are removed (these include bead-bead and bead-cell doublets)
+4. bead-bead doublets are removed by applying a default median±5 rule to events identified in step 2. The remaining bead events are used for normalization.
+
+<br>
+
+For debarcoding, an implementation of the single-cell deconvolution algorithm described by Zunder et al.2015 ^2^ was used from the CATALYST package.
+
+<br>
+
+
+## Commands
+
+<br>
+
+### For normalization only
+
+For performing only normalization on files, you will have to provide an input file or files, bead masses and an output directory to store the output files and plots. Bead masses are just a list for mass channels corresponding to the beads separated by comma (,) .
+
+```
+catalyst (--inputFiles=<files> --beadMasses=<beads> --outputDir=<results_dir>) [--k=<k> --trim=<trim> --removeBeads=<rmbeads>]
+
+```
+<br>
+
+#### An example
+
+```
+catalyst  --inputFiles=test.fcs --beadMasses=140,151,153,165,175 --outputDir=results --k=300
+```
+
+<br>
+
+#### Output files
+
+All files are saved in the output directory as specified by the user.
+
+Filename | Description
+---------|------------------------------------------
+<a href="examples/beads_before_vs_after.pdf">beads_before_vs_after.pdf</a> | shows the intensity of smoothed normalization of beads
+<a href="examples/beads_gated.pdf">beads_gated.pdf</a> | Gating of beads to show singlets and doublets
+raw_concat_normalized.fcs | Normalized file
+raw_concat_beads.fcs | Raw file with beads.(only generated if beads are removed)
+
+
+<br>
+<br>
+
+### For debarcoding only
+
+To perform debarcoding, a barcode scheme file has to be provided <a href="examples/bc.txt">(example file)</a>.Please make sure it is a comma separate file and follows a similar format as the example.
+
+#### Output files
+
+Filename | Description
+---------|------------------------------------------
+<a href="examples/yield_plot.pdf">yield_plot.pdf</a>|plot of yield vs barcode separation to asses channel staining.
+<a href="examples/event_plot.pdf">event_plot.pdf</a>|plots normalized intensities for each barcode
+<a href="examples/mahal_plot.pdf">mahal_plot.pdf</a>|plots all inter-barcode interactions for the population specified
+
+#### Usage
+
+```
+catalyst (--inputFileDebarcode=<file> --outputDir=<results_dir>  --barcodeScheme=<file>) [--barcode_plotMahal=<barcode>]
+```
+
+
+<br>
+
+### For performing both normalization and debarcoding
+
+```
+catalyst (--inputFiles=<files> --beadMasses=<beads> --outputDir=<results_dir> --barcodeScheme=<file>) [--k=<k> --trim=<trim> --removeBeads=<rmbeads> --barcode_plotMahal=<barcode>]
+```
+
+<br>
+
+```
+Options:
+  --inputFiles=<files>          Input FCS files comma separated list
+  --outputDir=<dir>             Output directory for data and plots
+  --beadMasses=<beads>          Bead masses to be used for normalization
+  --removeBeads=<rmbeads>       [default: FALSE] remove beads
+  --k=<k>                       [default 300] integer width of the median window used for bead smoothing
+  --trim=<trim>                 [defualt 5] a single non-negative number applied to bead events
+  --inputFileDebarcode=<file>   A single input file for Debarcoding
+  --barcodeScheme=<filename>    filename for the barcode scheme
+  --barcode_plotMahal=<barcode> Barcode for function plotMahal to plot all inter-barcode interactions for one barcode compared to others
+```
+
+<br>
+<br>
+
+
+## Transformations
+
+There are 5 options for transformations. These are implemented by functions in R packages  <a href="https://www.bioconductor.org/packages/devel/bioc/html/flowCore.html">flowCore</a>  and <a href="https://www.bioconductor.org/packages/devel/bioc/html/cytofkit.html">Cytofkit</a>.
+
+Transformation| Description
+---------|------------------------------------------
+logicl|Logicle transformation creates a subset of biexponentialTransform hyperbolic sine transformation functions.
+autoLgcl| Similar to autoLgcl but uses a different method to detect outliers
+arcsinh| hyperbolic arcsine (arcsinh) transformation
+cytofAsinh|Inverse hyperbolic sine transformation (arsinh) with a cofactor of 5, reduce noise from negative values
+none| No transformation is performed
+
+
+Each of these transformation takes in different input parameters for which default values are provided but in some cases, flexibility is needed to play around with these parameters to get a more appropriate transformation.
+
+## Commands
+
+```
+transform (--inputFiles=<files> --transformation=<name> --outputDir=<dir>) [--inputMarkers=<names> --prefix=<prefix> --w=<w> --t=<t> --m=<m> --a=<a> --a_a=<a_a> --a_b=<a_b> --a_c=<a_c> --q=<q>]
+```
+
+Description: Tranfrom data 
+
+```
+Options:
+--inputFiles=<files>           Input FCS files
+--inputMarkers=<makerfiles>   Input files wiht markers to do analysis on 
+--outputDir=<dir>             Output directory for data and plots
+--prefix=<prefix>             prefix for output file naming
+--transformation=<transform>  [default logicl] options:autoLgcl,none,arcsinh,cytofAsinh
+--w=<w>                       [default 0.25] parameter for Logicle Transform
+--t=<t>                       [default 262144] parameter for Logicle Transform
+--m=<m>                       [default 4.5] parameter for Logicle Transform
+--a=<a>                       [default 0] parameter for Logicle Transform
+--a_a=<a_a>                   [default 1 ] parameter for arcsinh Transform
+--a_b=<a_b>                   [default 1 ] parameter for arcsinh Transform
+--a_c=<a_c>                   [default 0 ] parameter for arcsinh Transform
+--q=<q>                       [default 0.05] parameter for autoLgcl Transform
+```
+
+
+<br>
+
+
+
+### References
+
+1. R. Finck et al., Normalization of mass cytometry data with bead standards. Cytometry Part A. 83A, 483–494 (2013).
+2. E. R. Zunder et al., Palladium-based mass tag cell barcoding with a doublet-filtering scheme and single-cell deconvolution algorithm. Nat. Protocols. 10, 316–333 (2015).

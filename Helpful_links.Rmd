@@ -1,0 +1,34 @@
+
+
+## Papers
+<br>
+
+There is no shortage of papers to read regarding different methods used for CyTOF. Some that I found useful are:
+
+1. <a href="http://www.nature.com/ni/journal/v17/n8/abs/ni.3485.html">Newell EW	& Cheng Y. Mass cytometry: blessed with the curse of dimensionality. (2016) Nature Immunology 17, 890–895 </a>
+
+2. <a href="http://www.nature.com/nri/journal/v16/n7/full/nri.2016.56.html">Saeys Y,	Gassen SV	& Lambrecht BN. Computational flow cytometry: helping to make sense of high-dimensional immunology data. (2016) Nature Reviews Immunology 16, 449–462</a>
+
+3. <a href="http://onlinelibrary.wiley.com/doi/10.1002/cyto.a.22271/abstract"> R. Finck et al., Normalization of mass cytometry data with bead standards. (2013) Cytometry Part A. 83A, 483–494.
+
+4. <a href="https://www.nature.com/nprot/journal/v10/n2/full/nprot.2015.020.html"> R. Zunder et al., Palladium-based mass tag cell barcoding with a doublet-filtering scheme and single-cell deconvolution algorithm. (2015) Nat. Protocols. 10, 316–333 </a>
+
+5. <a href="https://f1000research.com/articles/6-748/v1"> Nowicka M. et al. CyTOF workflow: differential discovery in high-throughput high-dimensional cytometry datasets </a>
+
+<br>
+
+
+## Web Resources
+
+1. <a href="http://flowrepository.org/"> Flowrepository </a>
+2. <a href="https://community.cytobank.org/"> Cytobank Community </a>
+3. <a href="http://cytoforum.stanford.edu/">  Cytoforum </a>
+
+<br>
+
+## R Packages
+Following are  some of the best packages available for CyTOF analysis
+
+1. <a href="https://bioconductor.org/packages/release/bioc/html/CATALYST.html"> CATALYST </a>
+2. <a  href="http://bioconductor.org/packages/release/bioc/html/flowCore.html"> FlowCore </a>
+3. <a href="http://bioconductor.org/packages/release/bioc/html/cytofkit.html"> Cytofkit </a>

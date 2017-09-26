@@ -1,0 +1,22 @@
+
+<!--html_preserve-->
+
+<style type = "text/css">
+.main-container {
+  max-width: none;
+	padding: 0px;
+}
+</style>
+
+<div class="jumbotron">
+	<div class="container">
+	<center>
+		<a href="introduction.html"><img src="img/mainimage.png"/></a>
+	</center>
+	</div>
+</div>
+
+<!--/html_preserve-->
+
+
+<p class="small"> Developed by the WCMC bioiformatics platform </p>

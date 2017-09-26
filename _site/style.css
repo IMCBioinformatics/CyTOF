@@ -1,0 +1,192 @@
+.wrapper {
+    text-align: right;
+}
+.center {
+  text-align: center;
+}
+
+h3 { 
+    display: block;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+
+h4 { 
+    display: block;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    text-decoration: underline;
+}
+
+
+h32 { 
+    display: block;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+blockquote {
+  font-style: italic
+}
+
+p.big {
+    line-height: 1.2;
+     font-size: 32px;
+}
+
+p.medium {
+    line-height: 1;
+     font-size: 28px;
+}
+
+p.small {
+    line-height: 1;
+     font-size: 12px;
+     right: 20%;
+}
+
+p  {
+     font-size: 18px;
+}
+
+
+.button {
+    background-color: #e01a1a; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+     -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button1 {border-radius: 8px;}
+
+.button1:hover {
+    background-color: white;
+    color: #e01a1a;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+  
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.topnav p {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    margin-right: 17%;
+    position: relative;
+    margin-top: 28px;
+    margin-bottom: 0;
+    
+    
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.topnav img { 
+  width: 50px; height: 52px;  position: absolute;
+    right: 10%;
+    margin-left: -25px; /*!important;   /*50% of your logo width */
+    display: block;
+    /*padding: 10px 5px;*/
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.main-container > div {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+ul > li > ul > li {
+  color: #149c82; /* bullet color */
+}
+
+
+pre { 
+    border-top-width: 0.05px;
+    border-left-width: 0.05px;
+    border-right-width: 0.05px;
+    border-bottom-width: 0.05px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+pre > code {
+   font-family: monospace;
+    white-space: pre;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+   color: #ed4909 ;
+}
+
+br.long {
+  content: "";
+  margin: 5em;
+  display: block;
+}
+
+br {
+  content: "";
+  margin: 2em;
+  display: block;
+}
+  
+

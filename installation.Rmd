@@ -1,0 +1,10 @@
+
+<br>
+
+# Introduction
+The following CyTOF analysis pipeline is created by the  WCMC bioinformatics platform and utilizes state-of-the artexisting R pacakages and custom code. The goal of this pipeline is to provide a simple interface for users to visualize their FCS files, transform, visualize and cluster their mass cytometry data.
+
+# Installation Instructions
+At the moment, this pipeline is installed on the Snyder server. If you have an account on Snyder, you can access the pipeline without any further installation.
+
+If you wish to install this on a local lab server, please contact Hena Ramay @ hena.ramay\@ucalgary.ca.

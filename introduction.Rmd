@@ -1,0 +1,81 @@
+<br class="long"/>
+
+# Introduction
+The following CyTOF analysis pipeline is created by the  WCMC bioinformatics platform and utilizes state-of-the art existing R packages and custom code. The goal of this pipeline is to provide a simple interface for users to visualize their FCS files, transform, visualize and cluster their mass cytometry data.
+
+<br>
+
+# Input files
+
+This pipeline requires .FCS files as a starting input. You can provide a single or multiple .FCS files as input. If multiple files are provided, the pipeline will either concatenate them or keep them as separate files and process them separately.
+
+<br>
+
+# Pipleline Structure
+
+<br>
+
+* Preprocessing
+
+    + Normalization
+    + Debarcoding
+    + Randomize 0 values between -1 and 0
+    + Transformations
+
+
+<br>
+
+* Visualize
+    + Plot markers for inspection
+    + t-SNE
+    + t-SNE with different marker expressions
+
+<br>
+
+* Cell Clustering - automated
+
+    + FlowSOM meta
+    + ClusterX
+
+<br>
+
+* Discovery
+
+    + Biomarker discovery : Citrus / Differential expression
+    + Cell Progression: ISOMAPS
+
+<br>
+
+# Usage
+
+
+All commands in this pipeline can be run on the Snyder console. Each command is structured in the following way:
+
+```
+COMMAND ( COMPULSARY Inputs) [OPTIONAL Inputs]
+```
+<br/>
+
+All inputs which are compulsory are shown inside the parentheses and optional inputs to a command are shown in square brackets. For optional inputs, default values are provided and can be see by typing:
+
+```
+COMMAND --help
+```
+<br/>
+
+Here is an example for the catalyst command used for bead normalization
+
+```
+catalyst (--inputFiles=<files> --beadMasses=<beads> --outputDir=<results_dir>) [--k=<k> --trim=<trim> --removeBeads=<rmbeads>]
+```
+
+In this example, --inputFiles , --beadMasses and outputDir are compulsory inputs and --k, --trim, --removeBead are optional.
+
+<br/>
+
+An example of how to perform normalization on an fcs files
+
+```
+catalyst  --inputFiles=example.fcs --beadMasses=140,151,153,165,175 --outputDir=results --k=300
+
+```

@@ -1,0 +1,43 @@
+
+
+<br class="long"/>
+
+
+## Introduction
+
+For automated cell clustering, two methods are provided at the moment:
+
+* FlowSOM 
+* ClusterX
+    
+
+## Command
+
+<br>
+
+```
+Cell_cluster  (--InputFile=<InputFile> --tsneInput=<tsne_dims.RDS> --method=<method> --outputDir=<results_dir>) [--FlowSOM_k=<k> --prefix=<prefix>]
+```
+
+<br>
+
+```
+Options:
+--inputFiles=<files>            A file containing the expression matrix after transformation
+--tsneInput=<tsnedims>          A file containing the T-sne Y matrix i.e the first and second dimensions 
+--method=<method>               options:FLOWSOM, ClusteX
+--FlowSOM_K=<k>                 Number of clusters to generate in FlowSOM
+--prefix=<p>                    prefix for output files and plots
+```
+
+<br>
+
+### Output files
+
+Filename | Description
+---------|------------------------------------------
+<a href="img/clustering.png">clustering_X.png</a>| Generates a t-SNE plot 
+clustering.RDS | A file which contains the clustering results.
+
+
+
