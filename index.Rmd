@@ -11,7 +11,7 @@
 <div class="jumbotron">
 	<div class="container">
 	<center>
-		<a href="introduction.html"><img src="img/mainimage.png"/></a>
+		<a href="introduction.html"><img src="img/frontimage.png"/></a>
 	</center>
 	</div>
 </div>
@@ -19,4 +19,4 @@
 <!--/html_preserve-->
 
 
-<p class="small"> Developed by the WCMC bioiformatics platform </p>
+<p class="small"> Developed by the IMC bioiformatics platform (Hena R. Ramay) </p>

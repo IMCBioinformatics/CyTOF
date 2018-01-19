@@ -1,6 +1,6 @@
-name: "WCMC CyTOF pipeline"
+name: "CytoMine"
 navbar:
-  title: "WCMC CyTOF pipeline"
+  title: "IMC CytoMine pipeline"
   type: inverse
   left:
     - text: "Home"

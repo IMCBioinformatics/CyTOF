@@ -1,0 +1,15 @@
+Filename,Type,Group,Number
+SI_FCS_export_SI11_01.fcs,SI,dB_GF,11
+SI_FCS_export_SI_13_0_1.fcs,SI,BC_GF,13
+SI_FCS_export_SI_1_0_1.fcs,SI,dG_col,1
+SI_FCS_export_SI_2_0_1.fcs,SI,dG_col,2
+SI_FCS_export_SI_3_0_1.fcs,SI,dG_col,3
+SI_FCS_export_SI_4_0.fcs,SI,dG_col,4
+SI_FCS_export_SI_5_0_1.fcs,SI,BC_col,5
+SI_FCS_export_SI_6_0_1.fcs,SI,BC_col,6
+SI_FCS_export_SI_7_0_1.fcs,SI,BC_col,7
+SI_FCS_export_SI_8_0_1.fcs,SI,dB_GF,8
+SI_FCS_export_SI_9_0_1.fcs,SI,dB_GF,9
+SI_FCS_export_SI15_0.fcs,SI,BC_GF,15a
+SI_FCS_export_SI15_01.fcs,SI,BC_GF,15b
+SI_FCS_export_SI_12_01_1.fcs,SI,BC_GF,12

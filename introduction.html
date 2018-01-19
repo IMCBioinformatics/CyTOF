@@ -173,7 +173,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">WCMC CyTOF pipeline</a>
+      <a class="navbar-brand" href="index.html">IMC CytoMine pipeline</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -243,7 +243,7 @@ $(document).ready(function () {
 <p><br class="long"/></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The following CyTOF analysis pipeline is created by the WCMC bioinformatics platform and utilizes state-of-the art existing R packages and custom code. The goal of this pipeline is to provide a simple interface for users to visualize their FCS files, transform, visualize and cluster their mass cytometry data.</p>
+<p>The following CyTOF analysis pipeline called <b>cytoMine<b> is developed by the IMC bioinformatics platform and utilizes state-of-the art existing R packages and custom code. The goal of this pipeline is to provide a simple interface for users to visualize their FCS files, transform, visualize and cluster their mass cytometry data.</p>
 <p><br></p>
 </div>
 <div id="input-files" class="section level1">
@@ -267,6 +267,7 @@ $(document).ready(function () {
 <ul>
 <li>Visualize
 <ul>
+<li>Basic plots for cell counts per sample, density plots for markers and PCA</li>
 <li>Plot markers for inspection</li>
 <li>t-SNE</li>
 <li>t-SNE with different marker expressions</li>
@@ -276,7 +277,7 @@ $(document).ready(function () {
 <ul>
 <li><p>Cell Clustering - automated</p>
 <ul>
-<li>FlowSOM meta</li>
+<li>FlowSOM</li>
 <li>ClusterX</li>
 </ul></li>
 </ul>
@@ -284,8 +285,8 @@ $(document).ready(function () {
 <ul>
 <li><p>Discovery</p>
 <ul>
-<li>Biomarker discovery : Citrus / Differential expression</li>
-<li>Cell Progression: ISOMAPS</li>
+<li>Biomarker discovery :Differential expression analysis (edgeR)</li>
+<li>Cell Progression: ISOMAPS (In progress)</li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -295,16 +296,112 @@ $(document).ready(function () {
 <p>All commands in this pipeline can be run on the Snyder console. Each command is structured in the following way:</p>
 <pre><code>COMMAND ( COMPULSARY Inputs) [OPTIONAL Inputs]</code></pre>
 <p><br/></p>
-<p>All inputs which are compulsory are shown inside the parentheses and optional inputs to a command are shown in square brackets. For optional inputs, default values are provided and can be see by typing:</p>
-<pre><code>COMMAND --help</code></pre>
+<p>All inputs which are compulsory are shown inside the parentheses and optional inputs to a command are shown in square brackets. For optional inputs, default values are provided and can be seen by typing:</p>
+<pre><code>cytoMine --help</code></pre>
 <p><br/></p>
 <p>Here is an example for the catalyst command used for bead normalization</p>
-<pre><code>catalyst (--inputFiles=&lt;files&gt; --beadMasses=&lt;beads&gt; --outputDir=&lt;results_dir&gt;) [--k=&lt;k&gt; --trim=&lt;trim&gt; --removeBeads=&lt;rmbeads&gt;]</code></pre>
-<p>In this example, –inputFiles , –beadMasses and outputDir are compulsory inputs and –k, –trim, –removeBead are optional.</p>
+<pre><code> cytoMine (--inputDir=&lt;directory&gt; --outputDir=&lt;directory&gt; --mode=&lt;exMode&gt;)  [--beadMasses=&lt;beads&gt;]</code></pre>
+<p>In this example, –inputFiles , –outputDir and –mode are compulsory parameters while to run bead normalization beadMasses is also needed.</p>
 <p><br/></p>
 <p>An example of how to perform normalization on an fcs files</p>
-<pre><code>catalyst  --inputFiles=example.fcs --beadMasses=140,151,153,165,175 --outputDir=results --k=300
+<pre><code>cytoMine  --inputDir=data --beadMasses=140,151,153,165,175 --outputDir=results --mode=full
 </code></pre>
+</div>
+<div id="modes" class="section level1">
+<h1>Modes</h1>
+<p>cytoMine is developed so users can do different level of pipeline executions and do not have to wait for the full pipeline to run if they just wanted some very basic plots to understand their data. For this purpose, cytoMine has four working modes</p>
+<div id="modechannels" class="section level2">
+<h2>–mode=channels</h2>
+<p>In this mode, a user can find out how the channels are named/described in their fcs files. This is important because the marker list that the user input must match the names given in the description parameter of the fcs file.</p>
+<div id="an-example-of-how-to-run-this-mode-is" class="section level3">
+<h3>An example of how to run this mode is:</h3>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=channels
+</code></pre>
+<p>A Channels.csv file is stored in the outputDir for quick look.</p>
+</div>
+</div>
+<div id="modebasic" class="section level2">
+<h2>–mode=basic</h2>
+<p>In the basic mode, only the very basic plots are generated to give the user idea about their data.</p>
+<div id="an-example-of-how-to-run-this-mode-is-1" class="section level3">
+<h3>An example of how to run this mode is:</h3>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=basic
+</code></pre>
+<p>The output is saved in the basicPlots folder in outputDir</p>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>counts_plot.png</td>
+<td>barplots of cell counts in each sample file</td>
+</tr>
+<tr class="even">
+<td>density_plot.png</td>
+<td>Density plots for each marker in the marker list for each sample</td>
+</tr>
+<tr class="odd">
+<td>PCA_plot.png</td>
+<td>PCA plots for samples</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="modefull" class="section level2">
+<h2>–mode=full</h2>
+<p>In this mode the whole cytoMine pipeline is executed. All the results are saved in the outputDir folder or appropriate subfolders. All the data is also stored in an R object called cytoMine.RDATA. This is used if the user wants to re-run the code for expert annotated re-clustering/merging of the data.</p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=full
+</code></pre>
+</div>
+<div id="modemergeclusters" class="section level2">
+<h2>–mode=mergeClusters</h2>
+<p>This mode is used only after the cytoMine pipeline has been executed in the full mode first. This mode is used to re-assign or merge clusters generated by FLOWSOM or ClusterX.</p>
+<div id="an-example-of-invoking-mergecluster-mode-with-flowsom-merging-of-clusters" class="section level3">
+<h3>An example of invoking mergeCluster mode with FlowSOM merging of clusters</h3>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=mergeCluster --reclustFSFile=merge_cluster.csv
+</code></pre>
+</div>
+</div>
+</div>
+<div id="required-inputfiles" class="section level1">
+<h1>Required InputFiles</h1>
+<p>All required inputFiles mentioned bellow should be in the inputDir. Default name for each file are provided. Please be consistent with the file format.</p>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="examples/sample_info.csv">sample_info.csv</a></td>
+<td>This file holds information about your filenames, grouping, type etc</td>
+</tr>
+<tr class="even">
+<td><a href="examples/marker_list.csv">marker_list.csv</a></td>
+<td>This file holds information about the markers of interest</td>
+</tr>
+<tr class="odd">
+<td><a href="examples/merge_clusters.csv">merge_clusters.csv</a></td>
+<td>Optional file only needed when –mode=mergeCluster</td>
+</tr>
+</tbody>
+</table>
+<p>*Note: please avoid having spaces in your fcs file names.Feel free to use ’_’ instead of space.</p>
 </div>
 
 
