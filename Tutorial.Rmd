@@ -368,14 +368,7 @@ To transfer your output folder with all the results to your computer, please use
 
 It is very important to spend time in planning your experiment. A good, thought through design will save you from having severe batch effects in your data that cannot be rectified later on by means of statistical methods. Please use barcoding where possible. If with barcoding, you have multiple runs, please include a control sample in each run so that it can be used later one to normalize all of the data. Also try to mix control and condition samples in each run.
 
-If you run samples separately and on different days, you are bound to have severe batch effect. This means that the main difference in your samples will be the day effect. Here is an example of one such
-data.
+If you run samples separately and on different days, you are bound to have severe batch effect. This means that the main difference in your samples will be the day effect. Here is an example of a PCA plot of such data. There are two conditions PKH and Saline with samples run on two different days and the main variability in this data is the day effect. One can avoid such situations by barcoding samples and introducing control samples in each run.
 
-
-
-
-
-
-
-Please be advised that if you are running multiple samples, use barcoding to avoid batch effects due to multiple runs. If you are using barcoding, 
+![Example](https://wcmcbioinformatics.github.io/CyTOF/img/PCA_example.png)
 
