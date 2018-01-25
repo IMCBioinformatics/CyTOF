@@ -21,6 +21,9 @@ navbar:
           href: clustering.html
         - text: "Discovery"
           href: discovery.html
+        - text: "Tutorial"
+          href: Tutorial.html
+          
   right:
     - icon: fa-github fa-lg
       href: https://github.com/WCMCBioinformatics/CyTOF

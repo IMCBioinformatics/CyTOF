@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Hena R. Ramay (hena.ramay@ucalgary.ca)" />
+
+
+<title>cytoMine: IMC CyTOF analysis Pipeline Tutorial</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">IMC CytoMine pipeline</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-gear"></span>
+     
+    pipeline
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Installation.html">Installation</a>
+    </li>
+    <li>
+      <a href="preprocessing.html">Preporcessing</a>
+    </li>
+    <li>
+      <a href="visualization.html">Visulaization</a>
+    </li>
+    <li>
+      <a href="clustering.html">Cell Clustering</a>
+    </li>
+    <li>
+      <a href="discovery.html">Discovery</a>
+    </li>
+    <li>
+      <a href="Tutorial.html">Tutorial</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/WCMCBioinformatics/CyTOF">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">cytoMine: IMC CyTOF analysis Pipeline Tutorial</h1>
+<h4 class="author"><em>Hena R. Ramay (<a href="mailto:hena.ramay@ucalgary.ca">hena.ramay@ucalgary.ca</a>) <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></em></h4>
+
+</div>
+
+
+<h4>
+Hena R. Ramay, PhD (hena.ramay@ucalgary.ca)
+</h4>
+<p><br class="long"/></p>
+<div id="prerequisites" class="section level2">
+<h2>Prerequisites</h2>
+<p>You must know how to load files on the Snyder server and basic UNIX commands to be able to run this pipeline. If you are new to UNIX, please take a basic online course on shell or unix commands. One recommendation is dataCamp’s introduction to shell for data science, <a href="https://www.datacamp.com/courses/introduction-to-shell-for-data-science" class="uri">https://www.datacamp.com/courses/introduction-to-shell-for-data-science</a>. Doing first two chapters from this course is enough to run the pipeline.</p>
+<p><br class="long"/></p>
+</div>
+<div id="where-are-your-cytof-files-on-the-server" class="section level2">
+<h2>1. Where are your CYTOF files on the server?</h2>
+<p>Once an experiment has finished, the CyTOF files are transferred to the Snyder server (Snyder.chgi.ucalgary.ca). Files are in: <b> /export/data/rawdata/npmcCytof/[PI’sname]/[YourName]/[Date]/ </b></p>
+<p>You can access them through programs like Filezilla by sftp. Please make sure that you have logged into VPN before connecting to the server.</p>
+<p><br class="long"/></p>
+</div>
+<div id="how-to-transfer-files-to-snyder" class="section level2">
+<h2>2: How to transfer files to Snyder</h2>
+<p>If you have modified fcs files by gating on them, you will need to transfer them back to the server for processing. Similar to how files are transferred from the server to your computer, you can transfer file back to your home directory <b> (/home/[username])</b> and into a specified folder/directory for being processed by cytoMine.</p>
+<p><br class="long"/></p>
+</div>
+<div id="input-directory-and-required-files" class="section level2">
+<h2>3: Input directory and required files</h2>
+<p>Please first make a project folder. Then in this folder create a folder which has all the .fcs files and all other required .csv files. In this tutorial ‘data’ is used as the input directory.</p>
+<p>For example, in my home directory /export/home/hramay I have created a directory Cytof_test and in this directory I have created a data directory which contains all input files. Input directory name is a required parameter of the pipeline and feel free to chose any name for it.</p>
+<p><br></p>
+<div class="figure">
+<img src="img/directories.png" />
+
+</div>
+<p><br> <br></p>
+<div id="required-inputfiles" class="section level3">
+<h3>Required InputFiles</h3>
+<p>All required inputFiles mentioned bellow should be in the inputDir. Default name for each file is provided. </p>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://wcmcbioinformatics.github.io/CyTOF/examples/sample_info.csv">sample_info.csv</a></td>
+<td>This file holds information about your filenames, grouping, type etc.</td>
+</tr>
+<tr class="even">
+<td><a href="https://wcmcbioinformatics.github.io/CyTOF/examples/marker_list.csv">marker_list.csv</a></td>
+<td>This file holds information about the markers of interest.</td>
+</tr>
+</tbody>
+</table>
+
+<p><br class="long"/> <br class="long"/></p>
+</div>
+</div>
+<div id="output-files" class="section level2">
+<h2>4. Output files</h2>
+<p>All output files will be stored in the specified output directory. Directory name is a required parameter of the pipeline. In the above directory structure, results is the output folder.</p>
+<p><br class="long"/> <br class="long"/></p>
+</div>
+<div id="usage" class="section level2">
+<h2>5. Usage</h2>
+<p>All commands in this pipeline can be run on the Snyder console. Each command is structured in the following way:</p>
+<pre><code>COMMAND ( COMPULSARY Input parameters) [OPTIONAL Input parameters]}</code></pre>
+
+<p>All input parameters that are compulsory are shown inside the parentheses and optional inputs to a command are shown in square brackets. By typing the following command you can get help about the available options</p>
+<pre><code>cytoMine --help</code></pre>
+<p><br> <br> <br> <br> <br></p>
+<pre><code>Usage:
+cytoMine (--inputDir=&lt;files&gt;  --outputDir=&lt;results_dir&gt; --mode=&lt;mode&gt;) [--transformMethod=&lt;methodName&gt;  --barcodeScheme=&lt;barcodeScheme&gt; --beadMasses=&lt;beads&gt; 
+--FlowSom_k=&lt;ClusterN&gt; --downSample=&lt;number&gt; --perplexity=&lt;p&gt;  --theta=&lt;theta&gt; --max_iter=&lt;max_iter&gt; 
+--num_threads=&lt;num_threads&gt; --sampleFile=&lt;csvfile&gt; --markerFile=&lt;csvfile&gt; --reclustFSFile=&lt;csvfile&gt; 
+--reclustCXFile=&lt;csvfile&gt;]
+
+Options:
+--inputDir=&lt;files&gt;              Input FCS files direcotry
+--outputDir=&lt;dir&gt;               Output directory for data and plots
+--mode=&lt;mode&gt;                   [defualt full] modes available: basic, concat, channels or full
+--beadMasses=&lt;beads&gt;                Bead masses to be used for normalization (optional)
+--barcodeScheme=&lt;filename&gt;      filename for the barcode scheme for debarcoding (optional)
+--transformMethod=&lt;transform&gt;   [default logicl] options:autoLgcl,none,arcsinh,cytofAsinh
+--FlowSom_k=&lt;N of clusters&gt;     Number of clusters to calculate with FLOWSOM
+--downSample=&lt;number of cells&gt;  [default 5000] or set your own numnber
+--perplexity=&lt;p&gt;                [default 30 ] Perplexity parameter
+--theta=&lt;theta&gt;                 [default 0.5 ] Speed/accuracy trade-off (increase for less accuracy),
+                                set to 0.0 for exact TSNE (default: 0.5)
+--max_iter=&lt;max_iter&gt;           [default 1000] Number of iterations
+--num_threads=&lt;num_threads&gt;     [default 2] Number of cores to be used for parallel runs.
+--sampleFile=&lt;csvfile&gt;          [default Sample_info.csv in inputDir] else any filename in inputDir.
+--markerFile=&lt;csvfile&gt;          [default marker_list.csv in inputDir] else any filename in inputDir.
+--reclustFSFile=&lt;csvfile&gt;       [default merge_FlowSom.csv in inputDir] else any filename in inputDir. 
+                                This file is used to merge clusters generated by FlowSOM using user
+                                provided merge list
+--reclustCXFile=&lt;csvfile&gt;       [default merge_clusterx.csv in inputDir] else any filename in inputDir.
+                                This file is used to merge clusters generated by ClusterX using user
+                                provided merge list</code></pre>
+<p><br></p>
+</div>
+<div id="run-cytomine" class="section level2">
+<h2>6. Run cytoMine</h2>
+<p>Depending on the parts of the pipeline that you wish to run, you can chose the optional arguments and modes. The simplest command is as follows:</p>
+<pre><code>cytoMine  --inputDir=&lt;directory&gt; --outputDir=&lt;directory&gt; --mode=&lt;mode&gt;</code></pre>
+<p>There are different modes of the pipeline that can be run and are explained bellow:</p>
+<p><br></p>
+</div>
+<div id="modes" class="section level2">
+<h2>7. Modes</h2>
+<p>cytoMine is developed so users can do different level of pipeline executions and do not have to wait for the full pipeline to run if they just wanted some very basic plots to understand their data. For this purpose, cytoMine has four working modes</p>
+<p><br> <br></p>
+<div id="modechannels" class="section level3">
+<h3>–mode=channels</h3>
+<p>In this mode, a user can find out how the channels are named/described in their fcs files. This is important because the marker list that the user input must match the names given in the description parameter of the fcs file.</p>
+<p><br></p>
+<p><em>An example of how to run this mode is:</em></p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=channels
+</code></pre>
+<p>A Channels.csv file is stored in the outputDir for quick look.</p>
+<p><br> <br></p>
+</div>
+<div id="modeconcat" class="section level3">
+<h3>–mode=concat</h3>
+<p>In this mode, a user can concatenate multiples files in to one. The resulting fcs file will be stored in the output folder. You can then re-run these samples along with others in the mode full or basic by adding them to the sample_info.csv file and placing them into the input folder.</p>
+<p><br></p>
+<p><em>An example of how to run this mode is:</em></p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=concat
+</code></pre>
+<p><br> <br></p>
+</div>
+<div id="modebasic" class="section level3">
+<h3>–mode=basic</h3>
+<p>In the basic mode, only the very basic plots are generated to give the user idea about their data.</p>
+<p><br></p>
+<p><em>An example of how to run this mode is:</em></p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=basic
+</code></pre>
+<p>The output is saved in the basicPlots folder in outputDir.</p>
+<p><br></p>
+<table style="width:74%;">
+<colgroup>
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filename</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>counts_plot.png</td>
+<td>barplots of cell counts in each sample file</td>
+</tr>
+<tr class="even">
+<td>density_plot.png</td>
+<td>Density plots for each marker in the marker list for each sample</td>
+</tr>
+<tr class="odd">
+<td>PCA_plot.png</td>
+<td>PCA plots for samples</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+</div>
+<div id="modefull" class="section level3">
+<h3>–mode=full</h3>
+<p>In this mode the whole cytoMine pipeline is executed. All the results are saved in the outputDir folder or appropriate subfolders. All the data is also stored in an R object called cytoMine.RDATA. This is used if the user wants to re-run the code for expert annotated re-clustering/merging of the data.</p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=full
+</code></pre>
+<p><br> <br></p>
+</div>
+<div id="modemergeclusters" class="section level3">
+<h3>–mode=mergeClusters</h3>
+<p>This mode is used only after the cytoMine pipeline has been executed in the full mode first. This mode is used to re-assign or merge clusters generated by FLOWSOM or ClusterX.</p>
+<p><br></p>
+<p><em>An example of invoking mergeCluster mode with FlowSOM merging of clusters</em></p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=mergeCluster --reclustFSFile=merge_cluster.csv
+</code></pre>
+<p>An example of the merge_cluster.csv is <a href="https://wcmcbioinformatics.github.io/CyTOF/examples/merge_cluster.csv">here</a>. Please make sure that the column names are exactly the same.</p>
+<p><br class="long"/></p>
+</div>
+</div>
+<div id="use-cases" class="section level2">
+<h2>8. Use Cases</h2>
+<p>Follow are some of the use cases of the pipeline:</p>
+<p><br></p>
+<div id="i.-find-out-correct-channel-descriptions" class="section level3">
+<h3>i. Find out correct Channel descriptions</h3>
+<p>It is pivotal that channel descriptions are used in your markers.csv file not the marker names. If they do not match, you will get an error as follows:</p>
+<p><br></p>
+<pre><code>&quot;CytoMine: ** Error** Marker list does not match fcs file description.
+ Please take a look at the &#39;desc&#39; column in  Channels.csv file in results directory.&quot;</code></pre>
+<p><b>Please take a look at the Channels.csv file and make sure that markers in the markers.csv match the desc column of the Channels.csv file.</b></p>
+<p><br></p>
+</div>
+<div id="ii.-run-pipeline-to-get-basic-plots-to-know-your-data." class="section level3">
+<h3>ii. Run pipeline to get basic plots to know your data.</h3>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=basic
+</code></pre>
+<p><br></p>
+</div>
+<div id="iii.-run-full-pipeline-with-normlization-and-debarcoding" class="section level3">
+<h3>iii. Run full pipeline with normlization and debarcoding</h3>
+<p>If you wish to use raw fcs files that are not normalized or debarcoded, you can use cytoMine to do so as follows:</p>
+<pre><code>cytoMine  ./analysis.R --inputDir=data --outputDir=results --mode=full --beadMasses=103,105,106
+--barcodeScheme=bc.txt</code></pre>
+<p>–beadMasses parameter takes a list of bead masses for normalization and –barcodeScheme parameter takes a file as input which contains the barcode scheme. An example of this file is <a href="https://wcmcbioinformatics.github.io/CyTOF/examples/bc.txt">bc.txt</a>. You can normalize and debarcode separately also.</p>
+<p>An optional parameter for normalization is norm_to which is a flowFrame or name of an FCS file from which baseline values should be computed and to which the input data should be normalized.</p>
+<p><br></p>
+</div>
+<div id="iv.-run-full-pipeline-without-normlizing-or-debarcoding" class="section level3">
+<h3>iv. Run full pipeline without normlizing or debarcoding</h3>
+<pre><code>cytoMine  ./analysis.R --inputDir=data --outputDir=results --mode=full </code></pre>
+<p><br></p>
+</div>
+<div id="v.-concatenate-files-before-running-the-pipeline" class="section level3">
+<h3>v. Concatenate files before running the pipeline</h3>
+<p>If you wish to concatenate fcs files, you can set up –concat option to true. This will save the resulting file in the outputDiR</p>
+<pre><code>cytoMine  ./analysis.R --inputDir=data --outputDir=results --mode=concat </code></pre>
+<p><br></p>
+</div>
+<div id="vi.-merge-assigned-clusters-by-automated-algorithms-based-on-expert-cluster-annotations" class="section level3">
+<h3>vi. Merge assigned clusters by automated algorithms based on expert cluster annotations</h3>
+<p>For FlowSOM clusters:</p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=mergeCluster --reclustFSFile=merge_cluster.csv
+</code></pre>
+<p>For ClusterX clusters:</p>
+<pre><code>cytoMine  --inputDir=data --outputDir=results --mode=mergeCluster --reclustCXFile=merge_cluster.csv
+</code></pre>
+<p>An example of the merge_cluster.csv is <a href="https://wcmcbioinformatics.github.io/CyTOF/examples/merge_cluster.csv">here</a>. Please make sure that the column names are exactly the same.</p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="download-data-from-the-server" class="section level2">
+<h2>9. Download data from the server</h2>
+<p>To transfer your output folder with all the results to your computer, please use Filezilla or other such programs to copy files.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Bioinformatics Platform @ International Microbiome Centre, University of Calgary, Calgary, AB<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
