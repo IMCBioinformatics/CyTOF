@@ -11,18 +11,58 @@ urlcolor: ProcessBlue
 header-includes: \usepackage{color}
 ---
 
-<h4> Hena R. Ramay, PhD (hena.ramay\@ucalgary.ca)</h4>
 
 <br class="long"/>
 
-## Prerequisites
+# 1. Intorduction
+
+The following CyTOF analysis pipeline called <b>cytoMine</b> is developed by the  IMC bioinformatics platform and utilizes state-of-the art existing R packages and custom code. The goal of this pipeline is to provide a simple command line interface so users can process their FCS files, transform, visualize and cluster their mass cytometry data.
+
+## Pipleline Structure
+
+<br>
+
+* Preprocessing
+
+    + Normalization
+    + Debarcoding
+    + Randomize 0 values between -1 and 0
+    + Transformations
+
+
+<br>
+
+* Visualization
+    + Basic plots for cell counts per sample, density plots for markers and PCA
+    + Plot markers for inspection
+    + t-SNE
+    + t-SNE with different marker expressions
+
+<br>
+
+* Cell Clustering - automated
+
+    + FlowSOM
+    + ClusterX
+
+<br>
+
+* Cluster Merging based on expert input
+
+* Discovery
+
+    + Biomarker discovery :Differential cluster analysis and marker analysis. (Automatic implementation is  for two conditions only. For more complicated comparison, please contact our bioinformatician)
+      
+<br>
+
+# 2. Prerequisites
 You must know how to load files on the Snyder server and basic UNIX commands to be able to run this pipeline. If you are new to UNIX, please take a basic online course on shell or unix commands. One recommendation is dataCamp's introduction to shell for data science, https://www.datacamp.com/courses/introduction-to-shell-for-data-science. Doing first two chapters from this course is enough to run the pipeline.
 
 
 <br class="long"/>
 
 
-## 1. Where are your CYTOF files on the server?
+# 3. Where are your CYTOF files on the server?
 Once an experiment has finished, the CyTOF files are transferred to the Snyder server (Snyder.chgi.ucalgary.ca). Files are in:
 <b> /export/data/rawdata/npmcCytof/[PI'sname]/[YourName]/[Date]/ </b>
 
@@ -30,13 +70,13 @@ You can access them through programs like Filezilla by sftp. Please make sure th
 
 <br class="long"/>
 
-## 2: How to transfer files to Snyder
+# 4: How to transfer files to Snyder
 If you have modified fcs files by gating on them, you will need to transfer them back to the server for processing.
 Similar to how files are transferred from the server to your computer, you can transfer file back to your home directory <b> (/home/[username])</b> and into a specified folder/directory for being processed by cytoMine. 
 
 <br class="long"/>
 
-## 3: Input directory and required files
+# 5: Input directory and required files
 
 Please first make a project folder. Then in this folder create a folder which has all the .fcs files and all other required .csv files. In this tutorial 'data' is used as the input directory.
 
@@ -49,7 +89,7 @@ For example take a look at figure 1. In my home directory /export/home/hramay I 
 <br>
 <br>
 
-### Required InputFiles
+## Required InputFiles
 All required inputFiles mentioned bellow should be in the inputDir. Default name for each file is provided. \textcolor{BrickRed}{Please use these files as templates and make sure column names are same.}
 
 
@@ -63,13 +103,13 @@ Filename | Description
 <br class="long"/>
 <br class="long"/>
 
-## 4. Output files
+# 6. Output files
 All output files will be stored in the specified output directory. Directory name is a required parameter of the pipeline. In the above directory structure, results is the output folder.
 
 <br class="long"/>
 <br class="long"/>
 
-## 5. Usage
+# 7. Usage
 
 All commands in this pipeline can be run on the Snyder console. Each command is structured in the following way:
 
@@ -125,7 +165,7 @@ Options:
 
 <br>
 
-## 6. Run cytoMine
+# 8. Run cytoMine
 
 Depending on the parts of the pipeline that you wish to run, you can chose the optional arguments and modes. The simplest command is as follows:
 
@@ -137,14 +177,14 @@ There are different modes of the pipeline that can be run and are explained bell
 
 <br>
 
-## 7. Modes
+# 9. Modes
 
 cytoMine is developed so users can do different level of pipeline executions and do not have to wait for the full pipeline to run if they just wanted some very basic plots to understand their data. For this purpose, cytoMine has four working modes
 
 <br> 
 <br> 
 
-### --mode=channels
+## --mode=channels
 
 In this mode, a user can find out how the channels are named/described in their fcs files. This is important because the marker list that the user input must match the names given in the description parameter of the fcs file.
 
@@ -162,7 +202,7 @@ A Channels.csv file is stored in the outputDir for quick look.
 <br> 
 <br> 
 
-### --mode=concat
+## --mode=concat
 
 In this mode, a user can concatenate multiples files in to one. The resulting fcs file will be stored in the output folder. You can then re-run these samples along with others in the mode full or basic by adding them to the sample_info.csv file and placing them into the input folder.
 
@@ -178,7 +218,7 @@ cytoMine  --inputDir=data --outputDir=results --mode=concat
 <br> 
 <br> 
 
-### --mode=basic
+## --mode=basic
 
 In the basic mode, only the very basic plots are generated to give the user idea about their data.
 
@@ -205,7 +245,7 @@ PCA_plot.png| PCA plots for samples
 <br> 
 <br> 
 
-### --mode=full
+## --mode=full
 
 In this mode the whole cytoMine pipeline is executed. All the results are saved in the outputDir folder or appropriate subfolders. All the data is also stored in an R object called cytoMine.RDATA. This is used if the user wants to re-run the code for expert annotated re-clustering/merging of the data.
 
@@ -217,7 +257,7 @@ cytoMine  --inputDir=data --outputDir=results --mode=full
 <br> 
 <br> 
 
-### --mode=mergeClusters
+## --mode=mergeClusters
 
 This mode is used only after the cytoMine pipeline has been executed in the full mode first. This mode is used to re-assign or merge clusters generated by FLOWSOM or ClusterX.
 
@@ -235,13 +275,13 @@ An example of the merge_cluster.csv is [here](https://wcmcbioinformatics.github.
 
 <br class="long"/>
 
-## 8. Use Cases
+# 10. Use Cases
 
 Follow are some of the use cases of the pipeline:
 
 <br> 
 
-### i. Find out correct Channel descriptions
+## i. Find out correct Channel descriptions
 
 It is pivotal that channel descriptions are used in your markers.csv file not the marker names. If they do not match, you will get an error as follows:
 
@@ -256,7 +296,7 @@ It is pivotal that channel descriptions are used in your markers.csv file not th
 
 <br> 
 
-### ii. Run pipeline to get basic plots to know your data.
+## ii. Run pipeline to get basic plots to know your data.
 
 ```
 cytoMine  --inputDir=data --outputDir=results --mode=basic
@@ -265,7 +305,7 @@ cytoMine  --inputDir=data --outputDir=results --mode=basic
 
 <br> 
 
-### iii. Run full pipeline with normlization and debarcoding
+## iii. Run full pipeline with normlization and debarcoding
 
 If you wish to use raw fcs files that are not normalized or debarcoded, you can use cytoMine to do so as follows:
 
@@ -281,7 +321,7 @@ An optional parameter for normalization is norm_to which is a flowFrame or name 
 
 <br> 
 
-### iv. Run full pipeline without normlizing or debarcoding
+## iv. Run full pipeline without normlizing or debarcoding
 
 ```
 cytoMine  ./analysis.R --inputDir=data --outputDir=results --mode=full 
@@ -289,7 +329,7 @@ cytoMine  ./analysis.R --inputDir=data --outputDir=results --mode=full
 
 <br> 
 
-### v. Concatenate files before running the pipeline
+## v. Concatenate files before running the pipeline
 
 If you wish to concatenate fcs files, you can set up --concat option to true. This will save the resulting file in the outputDiR
 ```
@@ -298,7 +338,7 @@ cytoMine  ./analysis.R --inputDir=data --outputDir=results --mode=concat
 
 <br> 
 
-### vi. Merge assigned clusters by automated algorithms based on expert cluster annotations
+## vi. Merge assigned clusters by automated algorithms based on expert cluster annotations
 
 For FlowSOM clusters:
 
@@ -306,6 +346,8 @@ For FlowSOM clusters:
 cytoMine  --inputDir=data --outputDir=results --mode=mergeCluster --reclustFSFile=merge_cluster.csv
 
 ```
+
+<br>
 
 For ClusterX clusters:
 
@@ -319,6 +361,21 @@ An example of the merge_cluster.csv is [here](https://wcmcbioinformatics.github.
 <br>
 <br>
 
-## 9. Download data from the server
+# 11. Download data from the server
 To transfer your output folder with all the results to your computer, please use Filezilla or other such programs to copy files.
+
+# 12. Cautionary Notes
+
+It is very important to spend time in planning your experiment. A good, thought through design will save you from having severe batch effects in your data that cannot be rectified later on by means of statistical methods. Please use barcoding where possible. If with barcoding, you have multiple runs, please include a control sample in each run so that it can be used later one to normalize all of the data. Also try to mix control and condition samples in each run.
+
+If you run samples separately and on different days, you are bound to have severe batch effect. This means that the main difference in your samples will be the day effect. Here is an example of one such
+data.
+
+
+
+
+
+
+
+Please be advised that if you are running multiple samples, use barcoding to avoid batch effects due to multiple runs. If you are using barcoding, 
 
