@@ -187,19 +187,13 @@ $(document).ready(function () {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-gear"></span>
+    <span class="fa fa-cog"></span>
      
-    pipeline
+    Introduction
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="introduction.html">Introduction</a>
-    </li>
-    <li>
-      <a href="Installation.html">Installation</a>
-    </li>
     <li>
       <a href="preprocessing.html">Preporcessing</a>
     </li>
@@ -212,10 +206,14 @@ $(document).ready(function () {
     <li>
       <a href="discovery.html">Discovery</a>
     </li>
-    <li>
-      <a href="Tutorial.html">Tutorial</a>
-    </li>
   </ul>
+</li>
+<li>
+  <a href="Tutorial.html">
+    <span class="fa fa-book"></span>
+     
+    Tutorial
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -529,6 +527,15 @@ Options:
 <div id="download-data-from-the-server" class="section level1">
 <h1>11. Download data from the server</h1>
 <p>To transfer your output folder with all the results to your computer, please use Filezilla or other such programs to copy files.</p>
+</div>
+<div id="cautionary-notes" class="section level1">
+<h1>12. Cautionary Notes</h1>
+<p>It is very important to spend time in planning your experiment. A good, thought through design will save you from having severe batch effects in your data that cannot be rectified later on by means of statistical methods. Please use barcoding where possible. If with barcoding, you have multiple runs, please include a control sample in each run so that it can be used later one to normalize all of the data. Also try to mix control and condition samples in each run.</p>
+<p>If you run samples separately and on different days, you are bound to have severe batch effect. This means that the main difference in your samples will be the day effect. Here is an example of a PCA plot of such data. There are two conditions PKH and Saline with samples run on two different days and the main variability in this data is the day effect. One can avoid such situations by barcoding samples and introducing control samples in each run.</p>
+<div class="figure">
+<img src="https://wcmcbioinformatics.github.io/CyTOF/img/PCA_example.png" alt="Example" />
+<p class="caption">Example</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />

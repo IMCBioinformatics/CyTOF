@@ -2,13 +2,13 @@
 title: "cytoMine: IMC CyTOF analysis Pipeline Tutorial"
 author:
 - Hena R. Ramay (hena.ramay@ucalgary.ca) ^[ Bioinformatics Platform \@ International Microbiome Centre, University of Calgary, Calgary, AB]
-output:
-  pdf_document:
-    number_sections: no
-    toc: yes
-    toc_depth: 4
-urlcolor: ProcessBlue
-header-includes: \usepackage{color}
+# output:
+#   pdf_document:
+#     number_sections: no
+#     toc: yes
+#     toc_depth: 4
+# urlcolor: ProcessBlue
+# header-includes: \usepackage{color}
 ---
 
 

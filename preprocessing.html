@@ -186,19 +186,13 @@ $(document).ready(function () {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-gear"></span>
+    <span class="fa fa-cog"></span>
      
-    pipeline
+    Introduction
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="introduction.html">Introduction</a>
-    </li>
-    <li>
-      <a href="Installation.html">Installation</a>
-    </li>
     <li>
       <a href="preprocessing.html">Preporcessing</a>
     </li>
@@ -211,10 +205,14 @@ $(document).ready(function () {
     <li>
       <a href="discovery.html">Discovery</a>
     </li>
-    <li>
-      <a href="Tutorial.html">Tutorial</a>
-    </li>
   </ul>
+</li>
+<li>
+  <a href="Tutorial.html">
+    <span class="fa fa-book"></span>
+     
+    Tutorial
+  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -376,7 +374,7 @@ $(document).ready(function () {
 </div>
 <div id="transformations" class="section level2">
 <h2>Transformations</h2>
-<p>There are 5 options for transformations. These are implemented by functions in R packages <a href="https://www.bioconductor.org/packages/devel/bioc/html/flowCore.html">flowCore</a> and <a href="https://www.bioconductor.org/packages/devel/bioc/html/cytofkit.html">Cytofkit</a>.</p>
+<p>There are 4 options for transformations. These are implemented by functions in R packages <a href="https://www.bioconductor.org/packages/devel/bioc/html/flowCore.html">flowCore</a> and <a href="https://www.bioconductor.org/packages/devel/bioc/html/cytofkit.html">Cytofkit</a>.</p>
 <table style="width:74%;">
 <colgroup>
 <col width="13%" />
@@ -394,18 +392,14 @@ $(document).ready(function () {
 <td>Logicle transformation creates a subset of biexponentialTransform hyperbolic sine transformation functions.</td>
 </tr>
 <tr class="even">
-<td>autoLgcl</td>
-<td>Similar to autoLgcl but uses a different method to detect outliers</td>
-</tr>
-<tr class="odd">
 <td>arcsinh</td>
 <td>hyperbolic arcsine (arcsinh) transformation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>cytofAsinh</td>
 <td>Inverse hyperbolic sine transformation (arsinh) with a cofactor of 5, reduce noise from negative values</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>none</td>
 <td>No transformation is performed</td>
 </tr>

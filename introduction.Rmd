@@ -17,8 +17,8 @@ This pipeline requires .FCS files as a starting input. You can provide a single 
 
 * Preprocessing
 
-    + Normalization
-    + Debarcoding
+    + <a href="preprocessing.html">Normalization</a>
+    + <a href="preprocessing.html">Debarcoding</a>
     + Randomize 0 values between -1 and 0
     + Transformations
 

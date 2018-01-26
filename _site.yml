@@ -6,13 +6,10 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "pipeline"
-      icon: fa-gear
+    - text: "Introduction"
+      href: introduction.html
+      icon: fa-cog
       menu:
-        - text: "Introduction"
-          href: introduction.html
-        - text: "Installation"
-          href: Installation.html
         - text: "Preporcessing"
           href:  preprocessing.html
         - text: "Visulaization"
@@ -21,8 +18,9 @@ navbar:
           href: clustering.html
         - text: "Discovery"
           href: discovery.html
-        - text: "Tutorial"
-          href: Tutorial.html
+    - text: "Tutorial"
+      href: Tutorial.html
+      icon: fa-book
           
   right:
     - icon: fa-github fa-lg
