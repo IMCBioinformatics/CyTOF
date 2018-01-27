@@ -200,7 +200,7 @@ $(document).ready(function () {
       <a href="visualization.html">Visulaization</a>
     </li>
     <li>
-      <a href="clustering.html">Cell Clustering</a>
+      <a href="clustering.html">Cell Clustering /Cell subset Detection</a>
     </li>
     <li>
       <a href="discovery.html">Discovery</a>
@@ -212,6 +212,13 @@ $(document).ready(function () {
     <span class="fa fa-book"></span>
      
     Tutorial
+  </a>
+</li>
+<li>
+  <a href="Helpful_links.html">
+    <span class="fa fa-ambulance"></span>
+     
+    Helpful Links
   </a>
 </li>
       </ul>
@@ -242,103 +249,49 @@ $(document).ready(function () {
 
 
 <p><br class="long"/></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>Visualization provides the following functionality:</p>
+<div id="visualization" class="section level1">
+<h1>Visualization</h1>
+<p><br></p>
+<p>To check the quality of your data at each step of the analysis, different levels of visualization is provided.</p>
 <ul>
-<li>Plot markers for inspection</li>
-<li>t-SNE</li>
-<li>t-SNE with different marker expressions</li>
+<li><p>Basic Plots</p>
+<ul>
+<li>Cell count barplots for each sample</li>
+<li>Density plots for each marker</li>
+<li>PCA and MDS plots for each sample</li>
+</ul></li>
 </ul>
 <p><br></p>
-</div>
-<div id="commands" class="section level2">
-<h2>Commands</h2>
+<ul>
+<li><p>t-SNE</p>
+<ul>
+<li>with marker expressions</li>
+<li>with marker expressions but 0 expression removed</li>
+</ul></li>
+</ul>
 <p><br></p>
-<div id="plot-markers-for-inspection" class="section level3">
-<h3>Plot markers for inspection</h3>
-<p>Before and after preprocessing your data, it is important to look at the intensity of markers. This pipeline includes a plot_marker command which can be used to plot a set of markers. The prefix is optional and will be useful to distinguish different files.</p>
-<pre><code>plot_marker_exp  (--inputFiles=&lt;files&gt; --markers=&lt;marker_list&gt; --outputDir=&lt;results_dir&gt;) [--prefix=&lt;prefix&gt;]</code></pre>
-<div id="output-files" class="section level4">
-<h4>Output files</h4>
-<table style="width:74%;">
-<colgroup>
-<col width="13%" />
-<col width="59%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Filename</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="img/plot_expression_markers_transformed.png">plot_expression_markers_X.png</a></td>
-<td>Generates a png of all markers of interest</td>
-</tr>
-<tr class="even">
-<td>Transformed_expr.RDS</td>
-<td>Saves the object for transformed expr values for further analysis</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="randomize-0-values-between--1-and-0" class="section level3">
-<h3>Randomize 0 values between -1 and 0</h3>
-<p>Before performing any transformation 0 values are randomized between -1 and 0.Here is an <a href="img/plot_expression_markers_transformed_nozero.png">example</a> of how the intensities look if the zeros are not randomized</p>
+<ul>
+<li><p>Clustering</p>
+<ul>
+<li>FLOWSOM clustering on t-SNE plot</li>
+<li>ClusterX clustering on t-SNE plot</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div id="basic-plots" class="section level3">
+<h3>Basic Plots</h3>
+<p>A set of Basic plots is generated to let users understand their data. These include cell count plots, density plots for each marker and PCA plots. Cell count plots can be used to check if there are reasonable number of events in each sample. Density plots for markers give an idea about the distribution of each marker. Dimension reduction methods like PCA and MDS can be useful if different conditions are represented by samples and one expects to see difference for the specific markers in these condition group.</p>
 <p><br></p>
 </div>
 <div id="t-sne-visualization" class="section level3">
 <h3>t-SNE visualization</h3>
-<p>t-Distributed Stochastic Neighbor Embedding (t-SNE) is a well established method for dimensionality reduction and is well suited for the visualization of high-dimensional data like CyTOF. In this pipeline, t-SNE is implemented using Rtsne.multicore R package which allows multi-threading for faster computations.</p>
-<pre><code>Rtsne (--inputFiles=&lt;files&gt;  --transformation=&lt;name&gt; --outputDir=&lt;dir&gt;) [--inputMarkers=&lt;names&gt; --perplexity=&lt;p&gt; --theta=&lt;theta&gt; --pca=&lt;pca&gt; --max_iter=&lt;max_iter&gt; --num_threads=&lt;num_threads&gt; --verbose=&lt;verbose&gt; --pca_center=&lt;pca_center&gt; --pca_scale=&lt;pca_scale&gt;]</code></pre>
+<p>t-Distributed Stochastic Neighbor Embedding (t-SNE) is a well established method for dimensionality reduction and is well suited for the visualization of high-dimensional data like CyTOF. In this pipeline, t-SNE is implemented using Rtsne.multicore R package which allows multi-threading for faster computations. Two dimmensional t-SNE plots, colored by marker intensities are also plotted to highlight differnces amongst samples for markers.</p>
 <p><br></p>
-<p>There are many optional inputs for the t-SNE function. For best results, it is important to play with perplexity, theta and max_iter.</p>
-<pre><code>Options:
---inputFiles=&lt;files&gt;           Input FCS files
---inputMarkers=&lt;makerfiles&gt;   Input files wiht markers to do analysis on 
---transformation=&lt;transform&gt;  [default logicl] options:autoLgcl,none,arcsinh,cytofAsinh
---perplexity=&lt;p&gt;              [default 30 ] Perplexity parameter
---theta=&lt;theta&gt;               [default 0.5 ] Speed/accuracy trade-off (increase for less accuracy),                                               set to 0.0 for exact tSNE (default: 0.5)
---pca=&lt;pca&gt;                   [default TRUE] Whether an initial PCA step should be performed
---max_iter=&lt;max_iter&gt;         [default 1000] Number of iterations
---num_threads=&lt;num_threads&gt;   [default 2] Number of cores to be used for parallel runs.
---verbose=&lt;verbose&gt;           [default FALSE]
---pca_center=&lt;pca_center&gt;     [default TRUE] Should data be centered before pca is applied?
---pca_scale=&lt;pca_scale&gt;       [default FALSE]  Should data be scaled before pca is applied?
---downsample=&lt;number&gt;         [default No dowmsampling if a number is not provided it will be used to downsample]</code></pre>
-<div id="output-files-1" class="section level4">
-<h4>Output files</h4>
-<table style="width:74%;">
-<colgroup>
-<col width="13%" />
-<col width="59%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Filename</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="img/tsne_comp.png">tsne.png</a></td>
-<td>Generates a t-SNE plot</td>
-</tr>
-<tr class="even">
-<td>tsne_dims.RDS</td>
-<td>A file which contains the t-SNE results for input for clustering.</td>
-</tr>
-</tbody>
-</table>
 </div>
+<div id="clustering" class="section level3">
+<h3>Clustering</h3>
+<p>Once clustering is performed by FLOWSOM or ClusterX, these clusters are projected on t-SNE plots for each sample.</p>
 </div>
-</div>
-<div id="t-sne-with-different-marker-expressions" class="section level2">
-<h2>t-SNE with different marker expressions</h2>
-<p>To plot different marker expressions on the t-sne plot, use the above command with the –inputMarkers list. A example out put plot will look like <a href="img/plot_expression_markers_transformed_tsne.png">this</a>.</p>
 </div>
 
 

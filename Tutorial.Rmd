@@ -104,7 +104,7 @@ Filename | Description
 <br class="long"/>
 
 # 6. Output files
-All output files will be stored in the specified output directory. Directory name is a required parameter of the pipeline. In the above directory structure, results is the output folder.
+All output files will be stored in the specified output directory. Directory name is a required parameter of the pipeline. In the above directory structure, results is the output folder. In this folders, subfolders are created with results from different steps of the pipeline. These subfolder names are self explanatory.
 
 <br class="long"/>
 <br class="long"/>

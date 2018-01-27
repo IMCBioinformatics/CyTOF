@@ -200,7 +200,7 @@ $(document).ready(function () {
       <a href="visualization.html">Visulaization</a>
     </li>
     <li>
-      <a href="clustering.html">Cell Clustering</a>
+      <a href="clustering.html">Cell Clustering /Cell subset Detection</a>
     </li>
     <li>
       <a href="discovery.html">Discovery</a>
@@ -212,6 +212,13 @@ $(document).ready(function () {
     <span class="fa fa-book"></span>
      
     Tutorial
+  </a>
+</li>
+<li>
+  <a href="Helpful_links.html">
+    <span class="fa fa-ambulance"></span>
+     
+    Helpful Links
   </a>
 </li>
       </ul>
@@ -242,46 +249,33 @@ $(document).ready(function () {
 
 
 <p><br class="long"/></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>For automated cell clustering, two methods are provided at the moment:</p>
+<div id="clustering-cell-subset-detection" class="section level1">
+<h1>Clustering/ Cell subset detection</h1>
+<p><br></p>
+<p>For automated cell subset detection also called cell clustering, two methods are provided at the moment:</p>
 <ul>
 <li>FlowSOM</li>
 <li>ClusterX</li>
 </ul>
+<p><br></p>
+<p>Both these methods perform unsupervised clustering, are fast and accurate when compared to other methods.</p>
+<p><br></p>
+<div id="flowsom" class="section level3">
+<h3>FlowSOM</h3>
+<p>FlowSOM, analyzes Flow or mass cytometry data using a Self-Organizing Map. It uses two-level clustering and star charts, the algorithm helps to obtain a clear overview of how all markers are behaving on all cells, and to detect subsets that might be missed otherwise.</p>
+<p><br></p>
 </div>
-<div id="command" class="section level2">
-<h2>Command</h2>
+<div id="clusterx" class="section level3">
+<h3>ClusterX</h3>
+<p>ClusterX is a clustering method improved from Clustering by fast search and find of density peaks.It is a density-based clustering algorithms, which is applied to the t-SNE map. The first step is to perform t-SNE dimensionality reduction and then estimate local density on the t-SNE maps. The cluster centers are represented by the density peaks and it then assigns the remaining cells to clusters.</p>
 <p><br></p>
-<pre><code>Cell_cluster  (--InputFile=&lt;InputFile&gt; --tsneInput=&lt;tsne_dims.RDS&gt; --method=&lt;method&gt; --outputDir=&lt;results_dir&gt;) [--FlowSOM_k=&lt;k&gt; --prefix=&lt;prefix&gt;]</code></pre>
-<p><br></p>
-<pre><code>Options:
---inputFiles=&lt;files&gt;            A file containing the expression matrix after transformation
---tsneInput=&lt;tsnedims&gt;          A file containing the T-sne Y matrix i.e the first and second dimensions 
---method=&lt;method&gt;               options:FLOWSOM, ClusteX
---FlowSOM_K=&lt;k&gt;                 Number of clusters to generate in FlowSOM
---prefix=&lt;p&gt;                    prefix for output files and plots</code></pre>
-<p><br></p>
-<div id="output-files" class="section level3">
-<h3>Output files</h3>
-<table>
-<thead>
-<tr class="header">
-<th>Filename</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="img/clustering.png">clustering_X.png</a></td>
-<td>Generates a t-SNE plot</td>
-</tr>
-<tr class="even">
-<td>clustering.RDS</td>
-<td>A file which contains the clustering results.</td>
-</tr>
-</tbody>
-</table>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<ol style="list-style-type: decimal">
+<li><p>Van Gassen et al., FlowSOM: Using self-organizing maps for visualization and interpretation of cytometry data. Cytometry A. 2015 Jul;87(7):636-45 <a href="http://www.r-project.org" class="uri">http://www.r-project.org</a>, <a href="http://dambi.ugent.be" class="uri">http://dambi.ugent.be</a>.</p></li>
+<li><p>Chen H et al., A Bioconductor Package for an Integrated Mass Cytometry Data Analysis Pipeline. PLoS Comput Biol 12(9): e1005112. <a href="https://doi.org/10.1371/journal.pcbi.1005112" class="uri">https://doi.org/10.1371/journal.pcbi.1005112</a></p></li>
+</ol>
 </div>
 </div>
 

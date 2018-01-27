@@ -15,11 +15,11 @@ This pipeline requires .FCS files as a starting input. You can provide a single 
 
 <br>
 
-* Preprocessing
+* <a href="preprocessing.html">Preprocessing</a>
 
     + <a href="preprocessing.html">Normalization</a>
     + <a href="preprocessing.html">Debarcoding</a>
-    + Randomize 0 values between -1 and 0
+    + <a href="processing.html#rand">Randomize 0 values between -1 and 0</a>
     + Transformations
 
 

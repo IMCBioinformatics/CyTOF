@@ -2,42 +2,33 @@
 
 <br class="long"/>
 
+# Clustering/ Cell subset detection
 
-## Introduction
+<br>
 
-For automated cell clustering, two methods are provided at the moment:
+For automated cell subset detection also called cell clustering, two methods are provided at the moment:
 
 * FlowSOM 
 * ClusterX
     
+<br>
 
-## Command
+Both these methods perform unsupervised clustering, are fast and accurate when compared to other methods.
 
 <br>
 
-```
-Cell_cluster  (--InputFile=<InputFile> --tsneInput=<tsne_dims.RDS> --method=<method> --outputDir=<results_dir>) [--FlowSOM_k=<k> --prefix=<prefix>]
-```
+### FlowSOM
+FlowSOM, analyzes Flow or mass cytometry data using a Self-Organizing Map. It uses two-level clustering and star charts, the algorithm helps to obtain a clear overview of how all markers are behaving on all cells, and to detect subsets that might be missed otherwise.
 
 <br>
 
-```
-Options:
---inputFiles=<files>            A file containing the expression matrix after transformation
---tsneInput=<tsnedims>          A file containing the T-sne Y matrix i.e the first and second dimensions 
---method=<method>               options:FLOWSOM, ClusteX
---FlowSOM_K=<k>                 Number of clusters to generate in FlowSOM
---prefix=<p>                    prefix for output files and plots
-```
+### ClusterX
+ClusterX is a clustering method improved from Clustering by fast search and find of density peaks.It is a density-based clustering algorithms, which is applied to the t-SNE map. The first step is to perform t-SNE dimensionality reduction and then estimate local density on the t-SNE maps. The cluster centers are represented by the density peaks and it then assigns the remaining cells to clusters. 
 
 <br>
 
-### Output files
+### References
+1. 
+Van Gassen et al., FlowSOM: Using self-organizing maps for visualization and interpretation of cytometry data. Cytometry A. 2015 Jul;87(7):636-45 http://www.r-project.org, http://dambi.ugent.be.
 
-Filename | Description
----------|------------------------------------------
-<a href="img/clustering.png">clustering_X.png</a>| Generates a t-SNE plot 
-clustering.RDS | A file which contains the clustering results.
-
-
-
+2. Chen H et al.,  A Bioconductor Package for an Integrated Mass Cytometry Data Analysis Pipeline. PLoS Comput Biol 12(9): e1005112. https://doi.org/10.1371/journal.pcbi.1005112

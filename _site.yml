@@ -14,13 +14,16 @@ navbar:
           href:  preprocessing.html
         - text: "Visulaization"
           href: visualization.html
-        - text: "Cell Clustering"
+        - text: "Cell Clustering /Cell subset Detection"
           href: clustering.html
         - text: "Discovery"
           href: discovery.html
     - text: "Tutorial"
       href: Tutorial.html
       icon: fa-book
+    - text: "Helpful Links"
+      href: Helpful_links.html
+      icon: fa-ambulance
           
   right:
     - icon: fa-github fa-lg

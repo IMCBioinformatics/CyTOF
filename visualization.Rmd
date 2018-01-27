@@ -1,84 +1,49 @@
 <br class="long"/>
 
-
-## Introduction
-
-Visualization provides the following functionality:
-
-* Plot markers for inspection
-* t-SNE
-* t-SNE with different marker expressions
+# Visualization
 
 <br>
 
-## Commands
+To check the quality of your data at each step of the analysis, different levels of visualization is provided.
+
+* Basic Plots
+
+    + Cell count barplots for each sample
+    + Density plots for each marker
+    + PCA and MDS plots for each sample
 
 <br>
 
-### Plot markers for inspection
+* t-SNE 
 
-Before and after preprocessing your data, it is important to look at the intensity of markers. This pipeline includes a plot_marker command which can be used to plot a set of markers. The prefix is optional and will be useful to distinguish different files.
+    + with marker expressions
+    + with marker expressions but 0 expression removed
 
-```
-plot_marker_exp  (--inputFiles=<files> --markers=<marker_list> --outputDir=<results_dir>) [--prefix=<prefix>]
-```
+<br>
 
-#### Output files
+* Clustering
 
-Filename | Description
----------|------------------------------------------
-<a href="img/plot_expression_markers_transformed.png">plot_expression_markers_X.png</a>| Generates a png of all markers of interest
-Transformed_expr.RDS | Saves the object for transformed expr values for further analysis
+    + FLOWSOM clustering on t-SNE plot
+    + ClusterX clustering on t-SNE plot
+
+<br>
 
 
-### Randomize 0 values between -1 and 0
-Before performing any transformation 0 values are randomized between -1 and 0.Here is an <a href="img/plot_expression_markers_transformed_nozero.png">example</a> of how the intensities look if the zeros are not randomized
+### Basic Plots
 
+A set of Basic plots is generated to let users understand their data. These include cell count plots, density plots for each marker and PCA plots. Cell count plots can be used to check if there are reasonable number of events in each sample. Density plots for markers give an idea about the distribution of each marker. Dimension reduction methods like PCA and MDS can be useful if different conditions are represented by samples and one expects to see difference for the specific markers in these condition group.
 
 <br>
 
 ### t-SNE visualization
 
-t-Distributed Stochastic Neighbor Embedding (t-SNE) is a well established method for dimensionality reduction and is well suited for the visualization of high-dimensional data like CyTOF. In this pipeline, t-SNE is implemented using Rtsne.multicore R package which allows multi-threading for faster computations.
+t-Distributed Stochastic Neighbor Embedding (t-SNE) is a well established method for dimensionality reduction and is well suited for the visualization of high-dimensional data like CyTOF. In this pipeline, t-SNE is implemented using Rtsne.multicore R package which allows multi-threading for faster computations. Two dimmensional t-SNE plots, colored by marker intensities are also plotted to highlight differnces amongst samples for markers.
 
-
-```
-Rtsne (--inputFiles=<files>  --transformation=<name> --outputDir=<dir>) [--inputMarkers=<names> --perplexity=<p> --theta=<theta> --pca=<pca> --max_iter=<max_iter> --num_threads=<num_threads> --verbose=<verbose> --pca_center=<pca_center> --pca_scale=<pca_scale>]
-```
 <br>
 
-There are many optional inputs for the t-SNE function. For best results, it is important to play with perplexity, theta and max_iter.
+### Clustering
 
-``` 
-Options:
---inputFiles=<files>           Input FCS files
---inputMarkers=<makerfiles>   Input files wiht markers to do analysis on 
---transformation=<transform>  [default logicl] options:autoLgcl,none,arcsinh,cytofAsinh
---perplexity=<p>              [default 30 ] Perplexity parameter
---theta=<theta>               [default 0.5 ] Speed/accuracy trade-off (increase for less accuracy),                                               set to 0.0 for exact tSNE (default: 0.5)
---pca=<pca>                   [default TRUE] Whether an initial PCA step should be performed
---max_iter=<max_iter>         [default 1000] Number of iterations
---num_threads=<num_threads>   [default 2] Number of cores to be used for parallel runs.
---verbose=<verbose>           [default FALSE]
---pca_center=<pca_center>     [default TRUE] Should data be centered before pca is applied?
---pca_scale=<pca_scale>	      [default FALSE]  Should data be scaled before pca is applied?
---downsample=<number>         [default No dowmsampling if a number is not provided it will be used to downsample]
-```
-
-#### Output files
-
-Filename | Description
----------|------------------------------------------
-<a href="img/tsne_comp.png">tsne.png</a>| Generates a t-SNE plot 
-tsne_dims.RDS | A file which contains the t-SNE results for input for clustering.
-
-
-
-
-## t-SNE with different marker expressions
-To plot different marker expressions on the t-sne plot, use the above command with the --inputMarkers list. A example out put plot will look like <a href="img/plot_expression_markers_transformed_tsne.png">this</a>.
-
-
+Once clustering is performed by FLOWSOM or ClusterX, these clusters are projected on t-SNE plots for each sample. 
 
 
 
